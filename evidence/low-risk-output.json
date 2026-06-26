@@ -1,0 +1,88 @@
+{
+  "send_risk_verdict": {
+    "risk_level": "pass",
+    "preflight_clear": true,
+    "blockers": [],
+    "evidence_summary": [
+      "auth spf=true dkim=true dmarc=true",
+      "list size=4200 bounce_rate=0.008 complaint_rate=0.0002 freshness=14",
+      "policy bounce<=0.02 complaint<=0.001 freshness<=90 warm_up>=14",
+      "content flags=none"
+    ],
+    "escalation": "none",
+    "dispatch_target": "send-as",
+    "effect_boundary": "public_send remains owned by governed send-as, not this skill"
+  },
+  "evidence_json": {
+    "schema": "spam.risk.reviewer.evidence.v1",
+    "skill": {
+      "name": "spam-risk-reviewer",
+      "version": "0.1.0"
+    },
+    "observations": [
+      "risk_level=pass",
+      "preflight_clear=true",
+      "authentication spf_pass=true dkim_pass=true dmarc_pass=true",
+      "list hygiene size=4200 bounce_rate=0.008 complaint_rate=0.0002 freshness=14",
+      "policy thresholds max_bounce_rate=0.02 max_complaint_rate=0.001 max_freshness_days=90 min_warm_up_days=14",
+      "content risk flags=none",
+      "blockers=none",
+      "harness cases=low-risk-verified-sender, high-risk-incomplete-auth-poor-list"
+    ],
+    "campaign_draft": {
+      "from": "newsletter@example.com",
+      "subject": "Weekly product update",
+      "content_digest": "Short opt-in newsletter for existing customers with unsubscribe footer."
+    },
+    "list_metadata": {
+      "size": 4200,
+      "bounce_rate": 0.008,
+      "complaint_rate": 0.0002,
+      "freshness": 14
+    },
+    "sender_auth_posture": {
+      "spf_pass": true,
+      "dkim_pass": true,
+      "dmarc_pass": true,
+      "warm_up_days": 45
+    },
+    "policy": {
+      "max_bounce_rate": 0.02,
+      "max_complaint_rate": 0.001,
+      "max_freshness_days": 90,
+      "min_warm_up_days": 14
+    },
+    "send_risk_verdict": {
+      "risk_level": "pass",
+      "preflight_clear": true,
+      "blockers": [],
+      "evidence_summary": [
+        "auth spf=true dkim=true dmarc=true",
+        "list size=4200 bounce_rate=0.008 complaint_rate=0.0002 freshness=14",
+        "policy bounce<=0.02 complaint<=0.001 freshness<=90 warm_up>=14",
+        "content flags=none"
+      ],
+      "escalation": "none",
+      "dispatch_target": "send-as",
+      "effect_boundary": "public_send remains owned by governed send-as, not this skill"
+    },
+    "dogfood": {
+      "package": "spam-risk-reviewer",
+      "input": "campaign_draft + list_metadata + sender_auth_posture",
+      "command": "runx skill <owner>/spam-risk-reviewer@0.1.0 --json",
+      "receipt_ref": null,
+      "verify_verdict": null,
+      "harness_cases": [
+        {
+          "name": "low-risk-verified-sender",
+          "expected_status": "sealed"
+        },
+        {
+          "name": "high-risk-incomplete-auth-poor-list",
+          "expected_status": "sealed"
+        }
+      ]
+    }
+  },
+  "report_md": "# Spam Risk Reviewer Report\n\n- Package: spam-risk-reviewer@0.1.0\n- Verdict: pass\n- Preflight clear: true\n- Escalation: none\n- Authentication checked: SPF=true, DKIM=true, DMARC=true\n- List hygiene checked: bounce_rate=0.008, complaint_rate=0.0002, freshness=14\n- Policy thresholds: bounce<=0.02, complaint<=0.001, freshness<=90, warm_up>=14\n- Blockers: none\n- Effect boundary: public_send remains owned by governed send-as.\n- Harness cases: low-risk-verified-sender and high-risk-incomplete-auth-poor-list.\n"
+}

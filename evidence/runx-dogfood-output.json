@@ -1,0 +1,7 @@
+{
+  "error": {
+    "code": "skill_error",
+    "message": "receipt store is unreadable: 参数错误。 (os error 87)"
+  },
+  "status": "failure"
+}

@@ -1,0 +1,1 @@
+{"status":"error","error":{"code":"rate_limited","detail":"GitHub API rate limit hit while resolving the repository.","hint":"Try again later, or claim the listing to authenticate via OAuth.","retry_after_seconds":1394}}

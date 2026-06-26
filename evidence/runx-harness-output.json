@@ -1,0 +1,15 @@
+{
+  "status": "failed",
+  "case_count": 2,
+  "assertion_error_count": 2,
+  "assertion_errors": [
+    "low-risk-verified-sender: receipt store is unreadable: 参数错误。 (os error 87)",
+    "high-risk-incomplete-auth-poor-list: receipt store is unreadable: 参数错误。 (os error 87)"
+  ],
+  "case_names": [
+    "low-risk-verified-sender",
+    "high-risk-incomplete-auth-poor-list"
+  ],
+  "receipt_ids": [],
+  "graph_case_count": 0
+}

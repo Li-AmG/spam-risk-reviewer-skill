@@ -1,0 +1,32 @@
+{
+  "schema": "spam.risk.reviewer.verification.v1",
+  "runx_cli_version": "runx-cli 0.6.13",
+  "doctor": "success",
+  "pr_url": "https://github.com/runxhq/runx/pull/146",
+  "source_url": "https://github.com/Li-AmG/spam-risk-reviewer-skill",
+  "x_yaml": "https://raw.githubusercontent.com/Li-AmG/runx/e53329d2d58954060def38291d12a3c7f69d81fa/skills/spam-risk-reviewer/X.yaml",
+  "skill_md": "https://raw.githubusercontent.com/Li-AmG/runx/e53329d2d58954060def38291d12a3c7f69d81fa/skills/spam-risk-reviewer/SKILL.md",
+  "evidence_json": "https://raw.githubusercontent.com/Li-AmG/spam-risk-reviewer-skill/master/evidence/evidence.json",
+  "report": "https://raw.githubusercontent.com/Li-AmG/spam-risk-reviewer-skill/master/evidence/report.md",
+  "node_cases": [
+    {
+      "status": "passed",
+      "verdict": "pass",
+      "name": "low-risk-verified-sender"
+    },
+    {
+      "status": "passed",
+      "verdict": "hold",
+      "name": "high-risk-incomplete-auth-poor-list"
+    }
+  ],
+  "runx_harness": {
+    "status": "blocked_on_windows_receipt_store",
+    "error": "receipt store is unreadable: 参数错误。 (os error 87)"
+  },
+  "url_index": {
+    "status": "rate_limited",
+    "retry_after_seconds": 1394
+  },
+  "receipt_ref": null
+}

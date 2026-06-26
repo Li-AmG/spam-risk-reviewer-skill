@@ -1,0 +1,55 @@
+{
+  "schema": "spam.risk.reviewer.delivery.evidence.v1",
+  "observations": [
+    "runx --version output: runx-cli 0.6.13",
+    "package name: spam-risk-reviewer",
+    "package version: 0.1.0",
+    "publisher/source owner: Li-AmG",
+    "PR URL: ",
+    "https://github.com/runxhq/runx/pull/146",
+    "source URL: ",
+    "https://github.com/Li-AmG/spam-risk-reviewer-skill",
+    "raw X.yaml: ",
+    "https://raw.githubusercontent.com/Li-AmG/runx/e53329d2d58954060def38291d12a3c7f69d81fa/skills/spam-risk-reviewer/X.yaml",
+    "raw SKILL.md: ",
+    "https://raw.githubusercontent.com/Li-AmG/runx/e53329d2d58954060def38291d12a3c7f69d81fa/skills/spam-risk-reviewer/SKILL.md",
+    "local node dogfood low-risk-verified-sender => risk_level=pass preflight_clear=true blockers=[]",
+    "local node dogfood high-risk-incomplete-auth-poor-list => risk_level=hold preflight_clear=false escalation=needs_human",
+    "authentication signals checked: SPF/DKIM/DMARC from typed input only",
+    "list hygiene metrics checked against bounce/complaint/freshness/warm-up thresholds",
+    "content risk flags checked for urgency and misleading language",
+    "runx doctor status: success, errors=0 warnings=0",
+    "runx harness attempted with runx-cli 0.6.13 on Windows; blocked by receipt store os error 87",
+    "runx public URL index attempted; api.runx.ai returned rate_limited retry_after_seconds=1394"
+  ],
+  "package": {
+    "name": "spam-risk-reviewer",
+    "version": "0.1.0",
+    "registry_ref": "Li-AmG/spam-risk-reviewer@0.1.0",
+    "public_url": "https://runx.ai/x/Li-AmG/spam-risk-reviewer@0.1.0",
+    "pr_url": "https://github.com/runxhq/runx/pull/146",
+    "source_url": "https://github.com/Li-AmG/spam-risk-reviewer-skill",
+    "x_yaml": "https://raw.githubusercontent.com/Li-AmG/runx/e53329d2d58954060def38291d12a3c7f69d81fa/skills/spam-risk-reviewer/X.yaml",
+    "skill_md": "https://raw.githubusercontent.com/Li-AmG/runx/e53329d2d58954060def38291d12a3c7f69d81fa/skills/spam-risk-reviewer/SKILL.md"
+  },
+  "dogfood": {
+    "command": "node run.mjs with fixtures/high-risk-incomplete-auth-poor-list.json and fixtures/low-risk-verified-sender.json",
+    "receipt_ref": null,
+    "verify_verdict": null,
+    "harness_cases": [
+      {
+        "name": "low-risk-verified-sender",
+        "observed": "pass/preflight_clear true"
+      },
+      {
+        "name": "high-risk-incomplete-auth-poor-list",
+        "observed": "hold/preflight_clear false needs_human"
+      }
+    ]
+  },
+  "blocker": {
+    "local_runx_receipt": "runx-cli 0.6.13 starts, but Windows host returns receipt store is unreadable: os error 87 when signing receipts",
+    "url_index": "api.runx.ai /v1/index rate_limited while resolving GitHub repo",
+    "no_fake_receipt": true
+  }
+}
