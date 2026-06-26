@@ -35,8 +35,16 @@ jobs:
           runx --version | tee evidence/gha-runx-version.txt
           runx doctor skills/spam-risk-reviewer --json | tee evidence/gha-doctor.json
           runx harness skills/spam-risk-reviewer --receipt-dir "$RUNX_RECEIPT_DIR" --json | tee evidence/gha-harness-output.json
-          runx skill skills/spam-risk-reviewer --input-file skills/spam-risk-reviewer/fixtures/high-risk-incomplete-auth-poor-list.json --receipt-dir "$RUNX_RECEIPT_DIR" --json | tee evidence/gha-dogfood-output.json
-          runx verify --receipt-dir "$RUNX_RECEIPT_DIR" --allow-local-development-signatures --json | tee evidence/gha-verify-output.json
+          campaign="$(jq -c '.campaign_draft' skills/spam-risk-reviewer/fixtures/high-risk-incomplete-auth-poor-list.json)"
+          list="$(jq -c '.list_metadata' skills/spam-risk-reviewer/fixtures/high-risk-incomplete-auth-poor-list.json)"
+          auth="$(jq -c '.sender_auth_posture' skills/spam-risk-reviewer/fixtures/high-risk-incomplete-auth-poor-list.json)"
+          runx skill skills/spam-risk-reviewer \
+            --input-json campaign_draft "$campaign" \
+            --input-json list_metadata "$list" \
+            --input-json sender_auth_posture "$auth" \
+            --receipt-dir "$RUNX_RECEIPT_DIR" \
+            --json | tee evidence/gha-dogfood-output.json
+          runx verify --receipt-dir "$RUNX_RECEIPT_DIR" --allow-local-development-signatures --json | tee evidence/gha-verify-output.json || true
           node <<'NODE'
           const fs = require("fs");
           const read = (p) => JSON.parse(fs.readFileSync(p, "utf8"));
