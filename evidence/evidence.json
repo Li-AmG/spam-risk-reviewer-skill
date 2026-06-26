@@ -23,7 +23,9 @@
     "runx harness attempted with runx-cli 0.6.13 on Windows; blocked by receipt store os error 87",
     "runx public URL index attempted; api.runx.ai returned rate_limited retry_after_seconds=1394",
     "github actions runx harness status: passed",
-    "github actions dogfood receipt_ref: runx:receipt:sha256:a975fab3a794701688ec6df10e5663084625f70e4fd6ccd1107f8b8e136ddc9b"
+    "github actions dogfood receipt_ref: runx:receipt:sha256:a975fab3a794701688ec6df10e5663084625f70e4fd6ccd1107f8b8e136ddc9b",
+    "github actions runx harness status: passed",
+    "github actions dogfood receipt_ref: runx:receipt:sha256:ada8b809fb35575bf24a5842c2923063912a4468d0f6d21b6435ceee5225fd72"
   ],
   "package": {
     "name": "spam-risk-reviewer",
@@ -37,7 +39,7 @@
   },
   "dogfood": {
     "command": "node run.mjs with fixtures/high-risk-incomplete-auth-poor-list.json and fixtures/low-risk-verified-sender.json",
-    "receipt_ref": "runx:receipt:sha256:a975fab3a794701688ec6df10e5663084625f70e4fd6ccd1107f8b8e136ddc9b",
+    "receipt_ref": "runx:receipt:sha256:ada8b809fb35575bf24a5842c2923063912a4468d0f6d21b6435ceee5225fd72",
     "verify_verdict": "unknown",
     "harness_cases": [
       {
@@ -66,14 +68,14 @@
         "high-risk-incomplete-auth-poor-list"
       ],
       "receipt_ids": [
-        "sha256:46e3ddf90923dad57529e7477466685cfd6abe7a1c9a2b11091cbbe4aedfc358",
-        "sha256:5764bc65c4150380ebc0fa70886210a8f774fc1c8df571af5dfe9b2e5abf71d2"
+        "sha256:aa8fc39208dd339888e1cfa31815f10984fc0740be13b3e5c0478a97d1c8048c",
+        "sha256:f65ede629297fc8f0d2051f0df32a693e942e0b8b392174aceabbba3acd02908"
       ],
       "graph_case_count": 0
     },
     "dogfood": {
       "closure": {
-        "closed_at": "2026-06-26T00:54:30.936Z",
+        "closed_at": "2026-06-26T02:08:17.539Z",
         "disposition": "closed",
         "reason_code": "process_closed",
         "summary": "cli-tool default completed"
@@ -400,7 +402,7 @@
           {
             "artifact_refs": [],
             "closure": {
-              "closed_at": "2026-06-26T00:54:30.936Z",
+              "closed_at": "2026-06-26T02:08:17.539Z",
               "disposition": "closed",
               "reason_code": "process_exit",
               "summary": "cli-tool exited successfully"
@@ -455,7 +457,7 @@
           "terms": []
         },
         "canonicalization": "runx.receipt.c14n.v1",
-        "created_at": "2026-06-26T00:54:30.936Z",
+        "created_at": "2026-06-26T02:08:17.539Z",
         "decisions": [
           {
             "artifact_refs": [],
@@ -483,8 +485,8 @@
             "selected_harness_ref": null
           }
         ],
-        "digest": "sha256:e935bfc1f13346144508046aff39ecde5fa24c0533ff454324334e472f680bb6",
-        "id": "sha256:a975fab3a794701688ec6df10e5663084625f70e4fd6ccd1107f8b8e136ddc9b",
+        "digest": "sha256:9eed1cdf133e160bad4c6cd1959765a2e82f51cb0ed82193278a6296a319ca77",
+        "id": "sha256:ada8b809fb35575bf24a5842c2923063912a4468d0f6d21b6435ceee5225fd72",
         "idempotency": {
           "content_hash": "sha256:run_default_b7d17bc0f194-default-content",
           "intent_key": "sha256:run_default_b7d17bc0f194-default-intent",
@@ -501,7 +503,7 @@
         },
         "schema": "runx.receipt.v1",
         "seal": {
-          "closed_at": "2026-06-26T00:54:30.936Z",
+          "closed_at": "2026-06-26T02:08:17.539Z",
           "criteria": [
             {
               "criterion_id": "process_exit",
@@ -512,14 +514,14 @@
             }
           ],
           "disposition": "closed",
-          "last_observed_at": "2026-06-26T00:54:30.936Z",
+          "last_observed_at": "2026-06-26T02:08:17.539Z",
           "reason_code": "process_closed",
           "summary": "cli-tool default completed"
         },
         "signals": [],
         "signature": {
           "alg": "Ed25519",
-          "value": "base64:xvQ3Sn-AtlcxXPgT9_DZm9pyfLEq4sLnCxNZjoL9hcG-zsxhLT3jPaXv_XDuZ-DbTB39oo6d8smcI31wrr3FBA"
+          "value": "base64:lZiYgYSKXAvg-Z6yEBLdYQUjac5cD2xpfgL_gbgQ1a1ymFpulzHEiWcY2h7JID4zQ5AJun_ZIvLHmGIWxhDhDg"
         },
         "subject": {
           "commitments": [],
@@ -530,7 +532,7 @@
           }
         }
       },
-      "receipt_id": "sha256:a975fab3a794701688ec6df10e5663084625f70e4fd6ccd1107f8b8e136ddc9b",
+      "receipt_id": "sha256:ada8b809fb35575bf24a5842c2923063912a4468d0f6d21b6435ceee5225fd72",
       "run_id": "run_default_b7d17bc0f194",
       "schema": "runx.skill_run.v1",
       "skill_name": "spam-risk-reviewer",
@@ -568,6 +570,45 @@
         },
         {
           "root_receipt_id": "sha256:a975fab3a794701688ec6df10e5663084625f70e4fd6ccd1107f8b8e136ddc9b",
+          "receipt_count": 1,
+          "parent_missing": null,
+          "valid": false,
+          "findings": [
+            {
+              "code": "SignatureKeyMissing",
+              "path": "issuer",
+              "message": "signature verifier could not resolve the issuer key"
+            }
+          ]
+        },
+        {
+          "root_receipt_id": "sha256:aa8fc39208dd339888e1cfa31815f10984fc0740be13b3e5c0478a97d1c8048c",
+          "receipt_count": 1,
+          "parent_missing": null,
+          "valid": false,
+          "findings": [
+            {
+              "code": "SignatureKeyMissing",
+              "path": "issuer",
+              "message": "signature verifier could not resolve the issuer key"
+            }
+          ]
+        },
+        {
+          "root_receipt_id": "sha256:ada8b809fb35575bf24a5842c2923063912a4468d0f6d21b6435ceee5225fd72",
+          "receipt_count": 1,
+          "parent_missing": null,
+          "valid": false,
+          "findings": [
+            {
+              "code": "SignatureKeyMissing",
+              "path": "issuer",
+              "message": "signature verifier could not resolve the issuer key"
+            }
+          ]
+        },
+        {
+          "root_receipt_id": "sha256:f65ede629297fc8f0d2051f0df32a693e942e0b8b392174aceabbba3acd02908",
           "receipt_count": 1,
           "parent_missing": null,
           "valid": false,

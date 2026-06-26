@@ -23,17 +23,17 @@
   "runx_harness": {
     "status": "passed",
     "receipt_ids": [
-      "sha256:46e3ddf90923dad57529e7477466685cfd6abe7a1c9a2b11091cbbe4aedfc358",
-      "sha256:5764bc65c4150380ebc0fa70886210a8f774fc1c8df571af5dfe9b2e5abf71d2"
+      "sha256:aa8fc39208dd339888e1cfa31815f10984fc0740be13b3e5c0478a97d1c8048c",
+      "sha256:f65ede629297fc8f0d2051f0df32a693e942e0b8b392174aceabbba3acd02908"
     ]
   },
   "url_index": {
     "status": "rate_limited",
     "retry_after_seconds": 1394
   },
-  "receipt_ref": "runx:receipt:sha256:a975fab3a794701688ec6df10e5663084625f70e4fd6ccd1107f8b8e136ddc9b",
+  "receipt_ref": "runx:receipt:sha256:ada8b809fb35575bf24a5842c2923063912a4468d0f6d21b6435ceee5225fd72",
   "dogfood": {
-    "receipt_ref": "runx:receipt:sha256:a975fab3a794701688ec6df10e5663084625f70e4fd6ccd1107f8b8e136ddc9b"
+    "receipt_ref": "runx:receipt:sha256:ada8b809fb35575bf24a5842c2923063912a4468d0f6d21b6435ceee5225fd72"
   },
   "verify": {
     "receipt_dir": "/home/runner/work/spam-risk-reviewer-skill/spam-risk-reviewer-skill/evidence/gha-receipts",
@@ -67,6 +67,45 @@
       },
       {
         "root_receipt_id": "sha256:a975fab3a794701688ec6df10e5663084625f70e4fd6ccd1107f8b8e136ddc9b",
+        "receipt_count": 1,
+        "parent_missing": null,
+        "valid": false,
+        "findings": [
+          {
+            "code": "SignatureKeyMissing",
+            "path": "issuer",
+            "message": "signature verifier could not resolve the issuer key"
+          }
+        ]
+      },
+      {
+        "root_receipt_id": "sha256:aa8fc39208dd339888e1cfa31815f10984fc0740be13b3e5c0478a97d1c8048c",
+        "receipt_count": 1,
+        "parent_missing": null,
+        "valid": false,
+        "findings": [
+          {
+            "code": "SignatureKeyMissing",
+            "path": "issuer",
+            "message": "signature verifier could not resolve the issuer key"
+          }
+        ]
+      },
+      {
+        "root_receipt_id": "sha256:ada8b809fb35575bf24a5842c2923063912a4468d0f6d21b6435ceee5225fd72",
+        "receipt_count": 1,
+        "parent_missing": null,
+        "valid": false,
+        "findings": [
+          {
+            "code": "SignatureKeyMissing",
+            "path": "issuer",
+            "message": "signature verifier could not resolve the issuer key"
+          }
+        ]
+      },
+      {
+        "root_receipt_id": "sha256:f65ede629297fc8f0d2051f0df32a693e942e0b8b392174aceabbba3acd02908",
         "receipt_count": 1,
         "parent_missing": null,
         "valid": false,

@@ -40,6 +40,45 @@
           "message": "signature verifier could not resolve the issuer key"
         }
       ]
+    },
+    {
+      "root_receipt_id": "sha256:aa8fc39208dd339888e1cfa31815f10984fc0740be13b3e5c0478a97d1c8048c",
+      "receipt_count": 1,
+      "parent_missing": null,
+      "valid": false,
+      "findings": [
+        {
+          "code": "SignatureKeyMissing",
+          "path": "issuer",
+          "message": "signature verifier could not resolve the issuer key"
+        }
+      ]
+    },
+    {
+      "root_receipt_id": "sha256:ada8b809fb35575bf24a5842c2923063912a4468d0f6d21b6435ceee5225fd72",
+      "receipt_count": 1,
+      "parent_missing": null,
+      "valid": false,
+      "findings": [
+        {
+          "code": "SignatureKeyMissing",
+          "path": "issuer",
+          "message": "signature verifier could not resolve the issuer key"
+        }
+      ]
+    },
+    {
+      "root_receipt_id": "sha256:f65ede629297fc8f0d2051f0df32a693e942e0b8b392174aceabbba3acd02908",
+      "receipt_count": 1,
+      "parent_missing": null,
+      "valid": false,
+      "findings": [
+        {
+          "code": "SignatureKeyMissing",
+          "path": "issuer",
+          "message": "signature verifier could not resolve the issuer key"
+        }
+      ]
     }
   ],
   "unreadable_files": [],

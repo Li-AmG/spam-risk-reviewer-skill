@@ -1,6 +1,6 @@
 {
   "closure": {
-    "closed_at": "2026-06-26T00:54:30.936Z",
+    "closed_at": "2026-06-26T02:08:17.539Z",
     "disposition": "closed",
     "reason_code": "process_closed",
     "summary": "cli-tool default completed"
@@ -327,7 +327,7 @@
       {
         "artifact_refs": [],
         "closure": {
-          "closed_at": "2026-06-26T00:54:30.936Z",
+          "closed_at": "2026-06-26T02:08:17.539Z",
           "disposition": "closed",
           "reason_code": "process_exit",
           "summary": "cli-tool exited successfully"
@@ -382,7 +382,7 @@
       "terms": []
     },
     "canonicalization": "runx.receipt.c14n.v1",
-    "created_at": "2026-06-26T00:54:30.936Z",
+    "created_at": "2026-06-26T02:08:17.539Z",
     "decisions": [
       {
         "artifact_refs": [],
@@ -410,8 +410,8 @@
         "selected_harness_ref": null
       }
     ],
-    "digest": "sha256:e935bfc1f13346144508046aff39ecde5fa24c0533ff454324334e472f680bb6",
-    "id": "sha256:a975fab3a794701688ec6df10e5663084625f70e4fd6ccd1107f8b8e136ddc9b",
+    "digest": "sha256:9eed1cdf133e160bad4c6cd1959765a2e82f51cb0ed82193278a6296a319ca77",
+    "id": "sha256:ada8b809fb35575bf24a5842c2923063912a4468d0f6d21b6435ceee5225fd72",
     "idempotency": {
       "content_hash": "sha256:run_default_b7d17bc0f194-default-content",
       "intent_key": "sha256:run_default_b7d17bc0f194-default-intent",
@@ -428,7 +428,7 @@
     },
     "schema": "runx.receipt.v1",
     "seal": {
-      "closed_at": "2026-06-26T00:54:30.936Z",
+      "closed_at": "2026-06-26T02:08:17.539Z",
       "criteria": [
         {
           "criterion_id": "process_exit",
@@ -439,14 +439,14 @@
         }
       ],
       "disposition": "closed",
-      "last_observed_at": "2026-06-26T00:54:30.936Z",
+      "last_observed_at": "2026-06-26T02:08:17.539Z",
       "reason_code": "process_closed",
       "summary": "cli-tool default completed"
     },
     "signals": [],
     "signature": {
       "alg": "Ed25519",
-      "value": "base64:xvQ3Sn-AtlcxXPgT9_DZm9pyfLEq4sLnCxNZjoL9hcG-zsxhLT3jPaXv_XDuZ-DbTB39oo6d8smcI31wrr3FBA"
+      "value": "base64:lZiYgYSKXAvg-Z6yEBLdYQUjac5cD2xpfgL_gbgQ1a1ymFpulzHEiWcY2h7JID4zQ5AJun_ZIvLHmGIWxhDhDg"
     },
     "subject": {
       "commitments": [],
@@ -457,7 +457,7 @@
       }
     }
   },
-  "receipt_id": "sha256:a975fab3a794701688ec6df10e5663084625f70e4fd6ccd1107f8b8e136ddc9b",
+  "receipt_id": "sha256:ada8b809fb35575bf24a5842c2923063912a4468d0f6d21b6435ceee5225fd72",
   "run_id": "run_default_b7d17bc0f194",
   "schema": "runx.skill_run.v1",
   "skill_name": "spam-risk-reviewer",
