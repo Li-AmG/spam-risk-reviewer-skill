@@ -20,7 +20,9 @@
     "content risk flags checked for urgency and misleading language",
     "runx doctor status: success, errors=0 warnings=0",
     "runx harness attempted with runx-cli 0.6.13 on Windows; blocked by receipt store os error 87",
-    "runx public URL index attempted; api.runx.ai returned rate_limited retry_after_seconds=1394"
+    "runx public URL index attempted; api.runx.ai returned rate_limited retry_after_seconds=1394",
+    "github actions runx harness status: passed",
+    "github actions dogfood receipt_ref: runx:receipt:sha256:a975fab3a794701688ec6df10e5663084625f70e4fd6ccd1107f8b8e136ddc9b"
   ],
   "package": {
     "name": "spam-risk-reviewer",
@@ -34,8 +36,8 @@
   },
   "dogfood": {
     "command": "node run.mjs with fixtures/high-risk-incomplete-auth-poor-list.json and fixtures/low-risk-verified-sender.json",
-    "receipt_ref": null,
-    "verify_verdict": null,
+    "receipt_ref": "runx:receipt:sha256:a975fab3a794701688ec6df10e5663084625f70e4fd6ccd1107f8b8e136ddc9b",
+    "verify_verdict": "unknown",
     "harness_cases": [
       {
         "name": "low-risk-verified-sender",
@@ -51,5 +53,534 @@
     "local_runx_receipt": "runx-cli 0.6.13 starts, but Windows host returns receipt store is unreadable: os error 87 when signing receipts",
     "url_index": "api.runx.ai /v1/index rate_limited while resolving GitHub repo",
     "no_fake_receipt": true
+  },
+  "github_actions": {
+    "harness": {
+      "status": "passed",
+      "case_count": 2,
+      "assertion_error_count": 0,
+      "assertion_errors": [],
+      "case_names": [
+        "low-risk-verified-sender",
+        "high-risk-incomplete-auth-poor-list"
+      ],
+      "receipt_ids": [
+        "sha256:46e3ddf90923dad57529e7477466685cfd6abe7a1c9a2b11091cbbe4aedfc358",
+        "sha256:5764bc65c4150380ebc0fa70886210a8f774fc1c8df571af5dfe9b2e5abf71d2"
+      ],
+      "graph_case_count": 0
+    },
+    "dogfood": {
+      "closure": {
+        "closed_at": "2026-06-26T00:54:30.936Z",
+        "disposition": "closed",
+        "reason_code": "process_closed",
+        "summary": "cli-tool default completed"
+      },
+      "execution": {
+        "exit_code": 0,
+        "skill_claim": {
+          "evidence_json": {
+            "campaign_draft": {
+              "content_digest": "Promotional blast to a stale imported list with aggressive urgency language.",
+              "from": "promo@example.net",
+              "subject": "URGENT discount expires tonight"
+            },
+            "dogfood": {
+              "command": "runx skill <owner>/spam-risk-reviewer@0.1.0 --json",
+              "harness_cases": [
+                {
+                  "expected_status": "sealed",
+                  "name": "low-risk-verified-sender"
+                },
+                {
+                  "expected_status": "sealed",
+                  "name": "high-risk-incomplete-auth-poor-list"
+                }
+              ],
+              "input": "campaign_draft + list_metadata + sender_auth_posture",
+              "package": "spam-risk-reviewer",
+              "receipt_ref": null,
+              "verify_verdict": null
+            },
+            "list_metadata": {
+              "bounce_rate": 0.085,
+              "complaint_rate": 0.006,
+              "freshness": 190,
+              "size": 28000
+            },
+            "observations": [
+              "risk_level=hold",
+              "preflight_clear=false",
+              "authentication spf_pass=true dkim_pass=false dmarc_pass=true",
+              "list hygiene size=28000 bounce_rate=0.085 complaint_rate=0.006 freshness=190",
+              "policy thresholds max_bounce_rate=0.02 max_complaint_rate=0.001 max_freshness_days=90 min_warm_up_days=14",
+              "content risk flags=urgency language, short-deadline promotion",
+              "blockers=DKIM did not pass | bounce_rate 0.085 exceeds 0.02 | complaint_rate 0.006 exceeds 0.001 | list freshness 190 days exceeds 90 | warm_up_days 3 below 14 | content risk flag: urgency language | content risk flag: short-deadline promotion",
+              "harness cases=low-risk-verified-sender, high-risk-incomplete-auth-poor-list"
+            ],
+            "policy": {
+              "max_bounce_rate": 0.02,
+              "max_complaint_rate": 0.001,
+              "max_freshness_days": 90,
+              "min_warm_up_days": 14
+            },
+            "schema": "spam.risk.reviewer.evidence.v1",
+            "send_risk_verdict": {
+              "blockers": [
+                "DKIM did not pass",
+                "bounce_rate 0.085 exceeds 0.02",
+                "complaint_rate 0.006 exceeds 0.001",
+                "list freshness 190 days exceeds 90",
+                "warm_up_days 3 below 14",
+                "content risk flag: urgency language",
+                "content risk flag: short-deadline promotion"
+              ],
+              "dispatch_target": "send-as",
+              "effect_boundary": "public_send remains owned by governed send-as, not this skill",
+              "escalation": "needs_human",
+              "evidence_summary": [
+                "auth spf=true dkim=false dmarc=true",
+                "list size=28000 bounce_rate=0.085 complaint_rate=0.006 freshness=190",
+                "policy bounce<=0.02 complaint<=0.001 freshness<=90 warm_up>=14",
+                "content flags=urgency language, short-deadline promotion"
+              ],
+              "preflight_clear": false,
+              "risk_level": "hold"
+            },
+            "sender_auth_posture": {
+              "dkim_pass": false,
+              "dmarc_pass": true,
+              "spf_pass": true,
+              "warm_up_days": 3
+            },
+            "skill": {
+              "name": "spam-risk-reviewer",
+              "version": "0.1.0"
+            }
+          },
+          "report_md": "# Spam Risk Reviewer Report\n\n- Package: spam-risk-reviewer@0.1.0\n- Verdict: hold\n- Preflight clear: false\n- Escalation: needs_human\n- Authentication checked: SPF=true, DKIM=false, DMARC=true\n- List hygiene checked: bounce_rate=0.085, complaint_rate=0.006, freshness=190\n- Policy thresholds: bounce<=0.02, complaint<=0.001, freshness<=90, warm_up>=14\n- Blockers: DKIM did not pass; bounce_rate 0.085 exceeds 0.02; complaint_rate 0.006 exceeds 0.001; list freshness 190 days exceeds 90; warm_up_days 3 below 14; content risk flag: urgency language; content risk flag: short-deadline promotion\n- Effect boundary: public_send remains owned by governed send-as.\n- Harness cases: low-risk-verified-sender and high-risk-incomplete-auth-poor-list.\n",
+          "send_risk_verdict": {
+            "blockers": [
+              "DKIM did not pass",
+              "bounce_rate 0.085 exceeds 0.02",
+              "complaint_rate 0.006 exceeds 0.001",
+              "list freshness 190 days exceeds 90",
+              "warm_up_days 3 below 14",
+              "content risk flag: urgency language",
+              "content risk flag: short-deadline promotion"
+            ],
+            "dispatch_target": "send-as",
+            "effect_boundary": "public_send remains owned by governed send-as, not this skill",
+            "escalation": "needs_human",
+            "evidence_summary": [
+              "auth spf=true dkim=false dmarc=true",
+              "list size=28000 bounce_rate=0.085 complaint_rate=0.006 freshness=190",
+              "policy bounce<=0.02 complaint<=0.001 freshness<=90 warm_up>=14",
+              "content flags=urgency language, short-deadline promotion"
+            ],
+            "preflight_clear": false,
+            "risk_level": "hold"
+          }
+        },
+        "stderr": "",
+        "stdout": "{\n  \"send_risk_verdict\": {\n    \"risk_level\": \"hold\",\n    \"preflight_clear\": false,\n    \"blockers\": [\n      \"DKIM did not pass\",\n      \"bounce_rate 0.085 exceeds 0.02\",\n      \"complaint_rate 0.006 exceeds 0.001\",\n      \"list freshness 190 days exceeds 90\",\n      \"warm_up_days 3 below 14\",\n      \"content risk flag: urgency language\",\n      \"content risk flag: short-deadline promotion\"\n    ],\n    \"evidence_summary\": [\n      \"auth spf=true dkim=false dmarc=true\",\n      \"list size=28000 bounce_rate=0.085 complaint_rate=0.006 freshness=190\",\n      \"policy bounce<=0.02 complaint<=0.001 freshness<=90 warm_up>=14\",\n      \"content flags=urgency language, short-deadline promotion\"\n    ],\n    \"escalation\": \"needs_human\",\n    \"dispatch_target\": \"send-as\",\n    \"effect_boundary\": \"public_send remains owned by governed send-as, not this skill\"\n  },\n  \"evidence_json\": {\n    \"schema\": \"spam.risk.reviewer.evidence.v1\",\n    \"skill\": {\n      \"name\": \"spam-risk-reviewer\",\n      \"version\": \"0.1.0\"\n    },\n    \"observations\": [\n      \"risk_level=hold\",\n      \"preflight_clear=false\",\n      \"authentication spf_pass=true dkim_pass=false dmarc_pass=true\",\n      \"list hygiene size=28000 bounce_rate=0.085 complaint_rate=0.006 freshness=190\",\n      \"policy thresholds max_bounce_rate=0.02 max_complaint_rate=0.001 max_freshness_days=90 min_warm_up_days=14\",\n      \"content risk flags=urgency language, short-deadline promotion\",\n      \"blockers=DKIM did not pass | bounce_rate 0.085 exceeds 0.02 | complaint_rate 0.006 exceeds 0.001 | list freshness 190 days exceeds 90 | warm_up_days 3 below 14 | content risk flag: urgency language | content risk flag: short-deadline promotion\",\n      \"harness cases=low-risk-verified-sender, high-risk-incomplete-auth-poor-list\"\n    ],\n    \"campaign_draft\": {\n      \"from\": \"promo@example.net\",\n      \"subject\": \"URGENT discount expires tonight\",\n      \"content_digest\": \"Promotional blast to a stale imported list with aggressive urgency language.\"\n    },\n    \"list_metadata\": {\n      \"size\": 28000,\n      \"bounce_rate\": 0.085,\n      \"complaint_rate\": 0.006,\n      \"freshness\": 190\n    },\n    \"sender_auth_posture\": {\n      \"spf_pass\": true,\n      \"dkim_pass\": false,\n      \"dmarc_pass\": true,\n      \"warm_up_days\": 3\n    },\n    \"policy\": {\n      \"max_bounce_rate\": 0.02,\n      \"max_complaint_rate\": 0.001,\n      \"max_freshness_days\": 90,\n      \"min_warm_up_days\": 14\n    },\n    \"send_risk_verdict\": {\n      \"risk_level\": \"hold\",\n      \"preflight_clear\": false,\n      \"blockers\": [\n        \"DKIM did not pass\",\n        \"bounce_rate 0.085 exceeds 0.02\",\n        \"complaint_rate 0.006 exceeds 0.001\",\n        \"list freshness 190 days exceeds 90\",\n        \"warm_up_days 3 below 14\",\n        \"content risk flag: urgency language\",\n        \"content risk flag: short-deadline promotion\"\n      ],\n      \"evidence_summary\": [\n        \"auth spf=true dkim=false dmarc=true\",\n        \"list size=28000 bounce_rate=0.085 complaint_rate=0.006 freshness=190\",\n        \"policy bounce<=0.02 complaint<=0.001 freshness<=90 warm_up>=14\",\n        \"content flags=urgency language, short-deadline promotion\"\n      ],\n      \"escalation\": \"needs_human\",\n      \"dispatch_target\": \"send-as\",\n      \"effect_boundary\": \"public_send remains owned by governed send-as, not this skill\"\n    },\n    \"dogfood\": {\n      \"package\": \"spam-risk-reviewer\",\n      \"input\": \"campaign_draft + list_metadata + sender_auth_posture\",\n      \"command\": \"runx skill <owner>/spam-risk-reviewer@0.1.0 --json\",\n      \"receipt_ref\": null,\n      \"verify_verdict\": null,\n      \"harness_cases\": [\n        {\n          \"name\": \"low-risk-verified-sender\",\n          \"expected_status\": \"sealed\"\n        },\n        {\n          \"name\": \"high-risk-incomplete-auth-poor-list\",\n          \"expected_status\": \"sealed\"\n        }\n      ]\n    }\n  },\n  \"report_md\": \"# Spam Risk Reviewer Report\\n\\n- Package: spam-risk-reviewer@0.1.0\\n- Verdict: hold\\n- Preflight clear: false\\n- Escalation: needs_human\\n- Authentication checked: SPF=true, DKIM=false, DMARC=true\\n- List hygiene checked: bounce_rate=0.085, complaint_rate=0.006, freshness=190\\n- Policy thresholds: bounce<=0.02, complaint<=0.001, freshness<=90, warm_up>=14\\n- Blockers: DKIM did not pass; bounce_rate 0.085 exceeds 0.02; complaint_rate 0.006 exceeds 0.001; list freshness 190 days exceeds 90; warm_up_days 3 below 14; content risk flag: urgency language; content risk flag: short-deadline promotion\\n- Effect boundary: public_send remains owned by governed send-as.\\n- Harness cases: low-risk-verified-sender and high-risk-incomplete-auth-poor-list.\\n\"\n}\n",
+        "structured_output": {
+          "evidence_json": {
+            "campaign_draft": {
+              "content_digest": "Promotional blast to a stale imported list with aggressive urgency language.",
+              "from": "promo@example.net",
+              "subject": "URGENT discount expires tonight"
+            },
+            "dogfood": {
+              "command": "runx skill <owner>/spam-risk-reviewer@0.1.0 --json",
+              "harness_cases": [
+                {
+                  "expected_status": "sealed",
+                  "name": "low-risk-verified-sender"
+                },
+                {
+                  "expected_status": "sealed",
+                  "name": "high-risk-incomplete-auth-poor-list"
+                }
+              ],
+              "input": "campaign_draft + list_metadata + sender_auth_posture",
+              "package": "spam-risk-reviewer",
+              "receipt_ref": null,
+              "verify_verdict": null
+            },
+            "list_metadata": {
+              "bounce_rate": 0.085,
+              "complaint_rate": 0.006,
+              "freshness": 190,
+              "size": 28000
+            },
+            "observations": [
+              "risk_level=hold",
+              "preflight_clear=false",
+              "authentication spf_pass=true dkim_pass=false dmarc_pass=true",
+              "list hygiene size=28000 bounce_rate=0.085 complaint_rate=0.006 freshness=190",
+              "policy thresholds max_bounce_rate=0.02 max_complaint_rate=0.001 max_freshness_days=90 min_warm_up_days=14",
+              "content risk flags=urgency language, short-deadline promotion",
+              "blockers=DKIM did not pass | bounce_rate 0.085 exceeds 0.02 | complaint_rate 0.006 exceeds 0.001 | list freshness 190 days exceeds 90 | warm_up_days 3 below 14 | content risk flag: urgency language | content risk flag: short-deadline promotion",
+              "harness cases=low-risk-verified-sender, high-risk-incomplete-auth-poor-list"
+            ],
+            "policy": {
+              "max_bounce_rate": 0.02,
+              "max_complaint_rate": 0.001,
+              "max_freshness_days": 90,
+              "min_warm_up_days": 14
+            },
+            "schema": "spam.risk.reviewer.evidence.v1",
+            "send_risk_verdict": {
+              "blockers": [
+                "DKIM did not pass",
+                "bounce_rate 0.085 exceeds 0.02",
+                "complaint_rate 0.006 exceeds 0.001",
+                "list freshness 190 days exceeds 90",
+                "warm_up_days 3 below 14",
+                "content risk flag: urgency language",
+                "content risk flag: short-deadline promotion"
+              ],
+              "dispatch_target": "send-as",
+              "effect_boundary": "public_send remains owned by governed send-as, not this skill",
+              "escalation": "needs_human",
+              "evidence_summary": [
+                "auth spf=true dkim=false dmarc=true",
+                "list size=28000 bounce_rate=0.085 complaint_rate=0.006 freshness=190",
+                "policy bounce<=0.02 complaint<=0.001 freshness<=90 warm_up>=14",
+                "content flags=urgency language, short-deadline promotion"
+              ],
+              "preflight_clear": false,
+              "risk_level": "hold"
+            },
+            "sender_auth_posture": {
+              "dkim_pass": false,
+              "dmarc_pass": true,
+              "spf_pass": true,
+              "warm_up_days": 3
+            },
+            "skill": {
+              "name": "spam-risk-reviewer",
+              "version": "0.1.0"
+            }
+          },
+          "report_md": "# Spam Risk Reviewer Report\n\n- Package: spam-risk-reviewer@0.1.0\n- Verdict: hold\n- Preflight clear: false\n- Escalation: needs_human\n- Authentication checked: SPF=true, DKIM=false, DMARC=true\n- List hygiene checked: bounce_rate=0.085, complaint_rate=0.006, freshness=190\n- Policy thresholds: bounce<=0.02, complaint<=0.001, freshness<=90, warm_up>=14\n- Blockers: DKIM did not pass; bounce_rate 0.085 exceeds 0.02; complaint_rate 0.006 exceeds 0.001; list freshness 190 days exceeds 90; warm_up_days 3 below 14; content risk flag: urgency language; content risk flag: short-deadline promotion\n- Effect boundary: public_send remains owned by governed send-as.\n- Harness cases: low-risk-verified-sender and high-risk-incomplete-auth-poor-list.\n",
+          "send_risk_verdict": {
+            "blockers": [
+              "DKIM did not pass",
+              "bounce_rate 0.085 exceeds 0.02",
+              "complaint_rate 0.006 exceeds 0.001",
+              "list freshness 190 days exceeds 90",
+              "warm_up_days 3 below 14",
+              "content risk flag: urgency language",
+              "content risk flag: short-deadline promotion"
+            ],
+            "dispatch_target": "send-as",
+            "effect_boundary": "public_send remains owned by governed send-as, not this skill",
+            "escalation": "needs_human",
+            "evidence_summary": [
+              "auth spf=true dkim=false dmarc=true",
+              "list size=28000 bounce_rate=0.085 complaint_rate=0.006 freshness=190",
+              "policy bounce<=0.02 complaint<=0.001 freshness<=90 warm_up>=14",
+              "content flags=urgency language, short-deadline promotion"
+            ],
+            "preflight_clear": false,
+            "risk_level": "hold"
+          }
+        }
+      },
+      "payload": {
+        "evidence_json": {
+          "campaign_draft": {
+            "content_digest": "Promotional blast to a stale imported list with aggressive urgency language.",
+            "from": "promo@example.net",
+            "subject": "URGENT discount expires tonight"
+          },
+          "dogfood": {
+            "command": "runx skill <owner>/spam-risk-reviewer@0.1.0 --json",
+            "harness_cases": [
+              {
+                "expected_status": "sealed",
+                "name": "low-risk-verified-sender"
+              },
+              {
+                "expected_status": "sealed",
+                "name": "high-risk-incomplete-auth-poor-list"
+              }
+            ],
+            "input": "campaign_draft + list_metadata + sender_auth_posture",
+            "package": "spam-risk-reviewer",
+            "receipt_ref": null,
+            "verify_verdict": null
+          },
+          "list_metadata": {
+            "bounce_rate": 0.085,
+            "complaint_rate": 0.006,
+            "freshness": 190,
+            "size": 28000
+          },
+          "observations": [
+            "risk_level=hold",
+            "preflight_clear=false",
+            "authentication spf_pass=true dkim_pass=false dmarc_pass=true",
+            "list hygiene size=28000 bounce_rate=0.085 complaint_rate=0.006 freshness=190",
+            "policy thresholds max_bounce_rate=0.02 max_complaint_rate=0.001 max_freshness_days=90 min_warm_up_days=14",
+            "content risk flags=urgency language, short-deadline promotion",
+            "blockers=DKIM did not pass | bounce_rate 0.085 exceeds 0.02 | complaint_rate 0.006 exceeds 0.001 | list freshness 190 days exceeds 90 | warm_up_days 3 below 14 | content risk flag: urgency language | content risk flag: short-deadline promotion",
+            "harness cases=low-risk-verified-sender, high-risk-incomplete-auth-poor-list"
+          ],
+          "policy": {
+            "max_bounce_rate": 0.02,
+            "max_complaint_rate": 0.001,
+            "max_freshness_days": 90,
+            "min_warm_up_days": 14
+          },
+          "schema": "spam.risk.reviewer.evidence.v1",
+          "send_risk_verdict": {
+            "blockers": [
+              "DKIM did not pass",
+              "bounce_rate 0.085 exceeds 0.02",
+              "complaint_rate 0.006 exceeds 0.001",
+              "list freshness 190 days exceeds 90",
+              "warm_up_days 3 below 14",
+              "content risk flag: urgency language",
+              "content risk flag: short-deadline promotion"
+            ],
+            "dispatch_target": "send-as",
+            "effect_boundary": "public_send remains owned by governed send-as, not this skill",
+            "escalation": "needs_human",
+            "evidence_summary": [
+              "auth spf=true dkim=false dmarc=true",
+              "list size=28000 bounce_rate=0.085 complaint_rate=0.006 freshness=190",
+              "policy bounce<=0.02 complaint<=0.001 freshness<=90 warm_up>=14",
+              "content flags=urgency language, short-deadline promotion"
+            ],
+            "preflight_clear": false,
+            "risk_level": "hold"
+          },
+          "sender_auth_posture": {
+            "dkim_pass": false,
+            "dmarc_pass": true,
+            "spf_pass": true,
+            "warm_up_days": 3
+          },
+          "skill": {
+            "name": "spam-risk-reviewer",
+            "version": "0.1.0"
+          }
+        },
+        "report_md": "# Spam Risk Reviewer Report\n\n- Package: spam-risk-reviewer@0.1.0\n- Verdict: hold\n- Preflight clear: false\n- Escalation: needs_human\n- Authentication checked: SPF=true, DKIM=false, DMARC=true\n- List hygiene checked: bounce_rate=0.085, complaint_rate=0.006, freshness=190\n- Policy thresholds: bounce<=0.02, complaint<=0.001, freshness<=90, warm_up>=14\n- Blockers: DKIM did not pass; bounce_rate 0.085 exceeds 0.02; complaint_rate 0.006 exceeds 0.001; list freshness 190 days exceeds 90; warm_up_days 3 below 14; content risk flag: urgency language; content risk flag: short-deadline promotion\n- Effect boundary: public_send remains owned by governed send-as.\n- Harness cases: low-risk-verified-sender and high-risk-incomplete-auth-poor-list.\n",
+        "send_risk_verdict": {
+          "blockers": [
+            "DKIM did not pass",
+            "bounce_rate 0.085 exceeds 0.02",
+            "complaint_rate 0.006 exceeds 0.001",
+            "list freshness 190 days exceeds 90",
+            "warm_up_days 3 below 14",
+            "content risk flag: urgency language",
+            "content risk flag: short-deadline promotion"
+          ],
+          "dispatch_target": "send-as",
+          "effect_boundary": "public_send remains owned by governed send-as, not this skill",
+          "escalation": "needs_human",
+          "evidence_summary": [
+            "auth spf=true dkim=false dmarc=true",
+            "list size=28000 bounce_rate=0.085 complaint_rate=0.006 freshness=190",
+            "policy bounce<=0.02 complaint<=0.001 freshness<=90 warm_up>=14",
+            "content flags=urgency language, short-deadline promotion"
+          ],
+          "preflight_clear": false,
+          "risk_level": "hold"
+        }
+      },
+      "receipt": {
+        "acts": [
+          {
+            "artifact_refs": [],
+            "closure": {
+              "closed_at": "2026-06-26T00:54:30.936Z",
+              "disposition": "closed",
+              "reason_code": "process_exit",
+              "summary": "cli-tool exited successfully"
+            },
+            "criterion_bindings": [
+              {
+                "criterion_id": "process_exit",
+                "evidence_refs": [],
+                "status": "verified",
+                "summary": "cli-tool exited successfully",
+                "verification_refs": []
+              }
+            ],
+            "form": "observation",
+            "id": "act_default",
+            "intent": {
+              "constraints": [],
+              "derived_from": [],
+              "legitimacy": "Runtime graph execution was admitted by the local harness",
+              "purpose": "Run graph step default",
+              "success_criteria": [
+                {
+                  "criterion_id": "process_exit",
+                  "required": true,
+                  "statement": "cli-tool exits successfully"
+                }
+              ]
+            },
+            "source_refs": [],
+            "summary": "Executed graph step default",
+            "target_refs": []
+          }
+        ],
+        "authority": {
+          "actor_ref": {
+            "type": "principal",
+            "uri": "runx:principal:local_runtime"
+          },
+          "attenuation": {
+            "parent_authority_ref": null,
+            "subset_proof": null
+          },
+          "authority_proof_refs": [],
+          "enforcement": {
+            "profile_hash": "sha256:runtime-skeleton-enforcement",
+            "redaction_refs": [],
+            "setup_refs": [],
+            "teardown_refs": []
+          },
+          "grant_refs": [],
+          "scope_refs": [],
+          "terms": []
+        },
+        "canonicalization": "runx.receipt.c14n.v1",
+        "created_at": "2026-06-26T00:54:30.936Z",
+        "decisions": [
+          {
+            "artifact_refs": [],
+            "choice": "open",
+            "closure": null,
+            "decision_id": "dec_default",
+            "inputs": {
+              "opportunity_refs": [],
+              "selection_ref": null,
+              "signal_refs": [],
+              "target_ref": null
+            },
+            "justification": {
+              "evidence_refs": [],
+              "summary": "runtime graph planner selected this node"
+            },
+            "proposed_intent": {
+              "constraints": [],
+              "derived_from": [],
+              "legitimacy": "Local graph execution requested this node",
+              "purpose": "Open runtime node default",
+              "success_criteria": []
+            },
+            "selected_act_id": "act_default",
+            "selected_harness_ref": null
+          }
+        ],
+        "digest": "sha256:e935bfc1f13346144508046aff39ecde5fa24c0533ff454324334e472f680bb6",
+        "id": "sha256:a975fab3a794701688ec6df10e5663084625f70e4fd6ccd1107f8b8e136ddc9b",
+        "idempotency": {
+          "content_hash": "sha256:run_default_b7d17bc0f194-default-content",
+          "intent_key": "sha256:run_default_b7d17bc0f194-default-intent",
+          "trigger_fingerprint": "sha256:run_default_b7d17bc0f194-default-trigger"
+        },
+        "issuer": {
+          "kid": "runx-demo-key",
+          "public_key_sha256": "sha256:3097e2dee2cb4a34b53840cdb705aed71067c36f68db0e0f559c3f3fa043315f",
+          "type": "hosted"
+        },
+        "lineage": {
+          "children": [],
+          "sync": []
+        },
+        "schema": "runx.receipt.v1",
+        "seal": {
+          "closed_at": "2026-06-26T00:54:30.936Z",
+          "criteria": [
+            {
+              "criterion_id": "process_exit",
+              "evidence_refs": [],
+              "status": "verified",
+              "summary": "cli-tool exited successfully",
+              "verification_refs": []
+            }
+          ],
+          "disposition": "closed",
+          "last_observed_at": "2026-06-26T00:54:30.936Z",
+          "reason_code": "process_closed",
+          "summary": "cli-tool default completed"
+        },
+        "signals": [],
+        "signature": {
+          "alg": "Ed25519",
+          "value": "base64:xvQ3Sn-AtlcxXPgT9_DZm9pyfLEq4sLnCxNZjoL9hcG-zsxhLT3jPaXv_XDuZ-DbTB39oo6d8smcI31wrr3FBA"
+        },
+        "subject": {
+          "commitments": [],
+          "kind": "skill",
+          "ref": {
+            "type": "harness",
+            "uri": "hrn_run_default_b7d17bc0f194_default"
+          }
+        }
+      },
+      "receipt_id": "sha256:a975fab3a794701688ec6df10e5663084625f70e4fd6ccd1107f8b8e136ddc9b",
+      "run_id": "run_default_b7d17bc0f194",
+      "schema": "runx.skill_run.v1",
+      "skill_name": "spam-risk-reviewer",
+      "status": "sealed"
+    },
+    "verify": {
+      "receipt_dir": "/home/runner/work/spam-risk-reviewer-skill/spam-risk-reviewer-skill/evidence/gha-receipts",
+      "signature_mode": "local-development",
+      "trees": [
+        {
+          "root_receipt_id": "sha256:46e3ddf90923dad57529e7477466685cfd6abe7a1c9a2b11091cbbe4aedfc358",
+          "receipt_count": 1,
+          "parent_missing": null,
+          "valid": false,
+          "findings": [
+            {
+              "code": "SignatureKeyMissing",
+              "path": "issuer",
+              "message": "signature verifier could not resolve the issuer key"
+            }
+          ]
+        },
+        {
+          "root_receipt_id": "sha256:5764bc65c4150380ebc0fa70886210a8f774fc1c8df571af5dfe9b2e5abf71d2",
+          "receipt_count": 1,
+          "parent_missing": null,
+          "valid": false,
+          "findings": [
+            {
+              "code": "SignatureKeyMissing",
+              "path": "issuer",
+              "message": "signature verifier could not resolve the issuer key"
+            }
+          ]
+        },
+        {
+          "root_receipt_id": "sha256:a975fab3a794701688ec6df10e5663084625f70e4fd6ccd1107f8b8e136ddc9b",
+          "receipt_count": 1,
+          "parent_missing": null,
+          "valid": false,
+          "findings": [
+            {
+              "code": "SignatureKeyMissing",
+              "path": "issuer",
+              "message": "signature verifier could not resolve the issuer key"
+            }
+          ]
+        }
+      ],
+      "unreadable_files": [],
+      "valid": false
+    }
   }
 }

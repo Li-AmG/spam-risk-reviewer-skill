@@ -18,3 +18,7 @@ https://raw.githubusercontent.com/Li-AmG/runx/e53329d2d58954060def38291d12a3c7f6
 - Effect boundary: public_send remains owned by governed send-as; this skill emits only send_risk_verdict
 - Local runx receipt/harness blocker: Windows receipt store returned os error 87 despite signed env and explicit receipt dirs
 - Public URL index blocker: api.runx.ai returned rate_limited with retry_after_seconds=1394; retry is queued by operator
+
+- GitHub Actions harness status: passed
+- GitHub Actions dogfood receipt_ref: runx:receipt:sha256:a975fab3a794701688ec6df10e5663084625f70e4fd6ccd1107f8b8e136ddc9b
+- GitHub Actions verify status: unknown

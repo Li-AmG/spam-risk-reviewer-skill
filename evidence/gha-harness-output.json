@@ -1,0 +1,15 @@
+{
+  "status": "passed",
+  "case_count": 2,
+  "assertion_error_count": 0,
+  "assertion_errors": [],
+  "case_names": [
+    "low-risk-verified-sender",
+    "high-risk-incomplete-auth-poor-list"
+  ],
+  "receipt_ids": [
+    "sha256:46e3ddf90923dad57529e7477466685cfd6abe7a1c9a2b11091cbbe4aedfc358",
+    "sha256:5764bc65c4150380ebc0fa70886210a8f774fc1c8df571af5dfe9b2e5abf71d2"
+  ],
+  "graph_case_count": 0
+}

@@ -1,0 +1,47 @@
+{
+  "receipt_dir": "/home/runner/work/spam-risk-reviewer-skill/spam-risk-reviewer-skill/evidence/gha-receipts",
+  "signature_mode": "local-development",
+  "trees": [
+    {
+      "root_receipt_id": "sha256:46e3ddf90923dad57529e7477466685cfd6abe7a1c9a2b11091cbbe4aedfc358",
+      "receipt_count": 1,
+      "parent_missing": null,
+      "valid": false,
+      "findings": [
+        {
+          "code": "SignatureKeyMissing",
+          "path": "issuer",
+          "message": "signature verifier could not resolve the issuer key"
+        }
+      ]
+    },
+    {
+      "root_receipt_id": "sha256:5764bc65c4150380ebc0fa70886210a8f774fc1c8df571af5dfe9b2e5abf71d2",
+      "receipt_count": 1,
+      "parent_missing": null,
+      "valid": false,
+      "findings": [
+        {
+          "code": "SignatureKeyMissing",
+          "path": "issuer",
+          "message": "signature verifier could not resolve the issuer key"
+        }
+      ]
+    },
+    {
+      "root_receipt_id": "sha256:a975fab3a794701688ec6df10e5663084625f70e4fd6ccd1107f8b8e136ddc9b",
+      "receipt_count": 1,
+      "parent_missing": null,
+      "valid": false,
+      "findings": [
+        {
+          "code": "SignatureKeyMissing",
+          "path": "issuer",
+          "message": "signature verifier could not resolve the issuer key"
+        }
+      ]
+    }
+  ],
+  "unreadable_files": [],
+  "valid": false
+}
