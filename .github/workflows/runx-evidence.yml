@@ -33,9 +33,9 @@ jobs:
           mkdir -p evidence/gha-receipts
           export RUNX_RECEIPT_DIR="$PWD/evidence/gha-receipts"
           runx --version | tee evidence/gha-runx-version.txt
-          runx doctor . --json | tee evidence/gha-doctor.json
-          runx harness . --receipt-dir "$RUNX_RECEIPT_DIR" --json | tee evidence/gha-harness-output.json
-          runx skill . --input-file fixtures/high-risk-incomplete-auth-poor-list.json --receipt-dir "$RUNX_RECEIPT_DIR" --json | tee evidence/gha-dogfood-output.json
+          runx doctor skills/spam-risk-reviewer --json | tee evidence/gha-doctor.json
+          runx harness skills/spam-risk-reviewer --receipt-dir "$RUNX_RECEIPT_DIR" --json | tee evidence/gha-harness-output.json
+          runx skill skills/spam-risk-reviewer --input-file skills/spam-risk-reviewer/fixtures/high-risk-incomplete-auth-poor-list.json --receipt-dir "$RUNX_RECEIPT_DIR" --json | tee evidence/gha-dogfood-output.json
           runx verify --receipt-dir "$RUNX_RECEIPT_DIR" --allow-local-development-signatures --json | tee evidence/gha-verify-output.json
           node <<'NODE'
           const fs = require("fs");

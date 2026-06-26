@@ -1,0 +1,103 @@
+{
+  "ok": false,
+  "preflight": {
+    "ok": false,
+    "target": {
+      "kind": "bounty",
+      "bountyNumber": 62,
+      "title": "runx skill: spam risk reviewer",
+      "expectedPackageName": "spam-risk-reviewer"
+    },
+    "requiredArtifacts": [
+      "public_url",
+      "source_url",
+      "pr_url",
+      "x_yaml",
+      "skill_md",
+      "verification_json",
+      "evidence_json",
+      "receipt_ref",
+      "report"
+    ],
+    "boundArtifacts": {
+      "public_url": "https://runx.ai/x/Li-AmG/spam-risk-reviewer@0.1.0",
+      "source_url": "https://github.com/Li-AmG/spam-risk-reviewer-skill",
+      "pr_url": "https://github.com/runxhq/runx/pull/146",
+      "x_yaml": "https://raw.githubusercontent.com/Li-AmG/runx/e53329d2d58954060def38291d12a3c7f69d81fa/skills/spam-risk-reviewer/X.yaml",
+      "skill_md": "https://raw.githubusercontent.com/Li-AmG/runx/e53329d2d58954060def38291d12a3c7f69d81fa/skills/spam-risk-reviewer/SKILL.md",
+      "evidence_json": "https://raw.githubusercontent.com/Li-AmG/spam-risk-reviewer-skill/master/evidence/evidence.json",
+      "verification_json": "https://raw.githubusercontent.com/Li-AmG/spam-risk-reviewer-skill/master/evidence/verification.json",
+      "report": "https://raw.githubusercontent.com/Li-AmG/spam-risk-reviewer-skill/master/evidence/report.md"
+    },
+    "errors": [
+      {
+        "code": "missing_artifact",
+        "message": "Missing required artifact 'receipt_ref'.",
+        "hint": "Deliver it as receipt_ref=<url-or-ref>. Do not use bare URLs for required slots."
+      },
+      {
+        "code": "bad_source_url",
+        "message": "source_url must be a public source or provenance URL, preferably pinned to a revision.",
+        "hint": "Use a stranger-fetchable HTTPS URL. GitHub source_url values must use /tree/<commit> or /commit/<sha>; keep private/operator URLs in a separate non-public artifact slot."
+      }
+    ],
+    "warnings": [],
+    "passingExample": [
+      "public_url=https://runx.ai/x/<owner>/spam-risk-reviewer@<version>",
+      "source_url=https://github.com/<owner>/spam-risk-reviewer/tree/<commit>",
+      "pr_url=https://github.com/runxhq/runx/pull/<number>",
+      "x_yaml=https://raw.githubusercontent.com/<owner>/<repo>/<commit>/skills/spam-risk-reviewer/X.yaml",
+      "skill_md=https://raw.githubusercontent.com/<owner>/<repo>/<commit>/skills/spam-risk-reviewer/SKILL.md",
+      "verification_json=https://raw.githubusercontent.com/<owner>/<repo>/<commit>/evidence/verification.json",
+      "evidence_json=https://example.com/evidence.json",
+      "receipt_ref=runx:receipt:<id>",
+      "report=https://example.com/report.md"
+    ]
+  },
+  "error": "delivery_preflight_failed",
+  "errors": [
+    {
+      "code": "missing_artifact",
+      "message": "Missing required artifact 'receipt_ref'.",
+      "hint": "Deliver it as receipt_ref=<url-or-ref>. Do not use bare URLs for required slots."
+    },
+    {
+      "code": "bad_source_url",
+      "message": "source_url must be a public source or provenance URL, preferably pinned to a revision.",
+      "hint": "Use a stranger-fetchable HTTPS URL. GitHub source_url values must use /tree/<commit> or /commit/<sha>; keep private/operator URLs in a separate non-public artifact slot."
+    }
+  ],
+  "warnings": [],
+  "required_artifacts": [
+    "public_url",
+    "source_url",
+    "pr_url",
+    "x_yaml",
+    "skill_md",
+    "verification_json",
+    "evidence_json",
+    "receipt_ref",
+    "report"
+  ],
+  "bound_artifacts": {
+    "public_url": "https://runx.ai/x/Li-AmG/spam-risk-reviewer@0.1.0",
+    "source_url": "https://github.com/Li-AmG/spam-risk-reviewer-skill",
+    "pr_url": "https://github.com/runxhq/runx/pull/146",
+    "x_yaml": "https://raw.githubusercontent.com/Li-AmG/runx/e53329d2d58954060def38291d12a3c7f69d81fa/skills/spam-risk-reviewer/X.yaml",
+    "skill_md": "https://raw.githubusercontent.com/Li-AmG/runx/e53329d2d58954060def38291d12a3c7f69d81fa/skills/spam-risk-reviewer/SKILL.md",
+    "evidence_json": "https://raw.githubusercontent.com/Li-AmG/spam-risk-reviewer-skill/master/evidence/evidence.json",
+    "verification_json": "https://raw.githubusercontent.com/Li-AmG/spam-risk-reviewer-skill/master/evidence/verification.json",
+    "report": "https://raw.githubusercontent.com/Li-AmG/spam-risk-reviewer-skill/master/evidence/report.md"
+  },
+  "passing_example": [
+    "public_url=https://runx.ai/x/<owner>/spam-risk-reviewer@<version>",
+    "source_url=https://github.com/<owner>/spam-risk-reviewer/tree/<commit>",
+    "pr_url=https://github.com/runxhq/runx/pull/<number>",
+    "x_yaml=https://raw.githubusercontent.com/<owner>/<repo>/<commit>/skills/spam-risk-reviewer/X.yaml",
+    "skill_md=https://raw.githubusercontent.com/<owner>/<repo>/<commit>/skills/spam-risk-reviewer/SKILL.md",
+    "verification_json=https://raw.githubusercontent.com/<owner>/<repo>/<commit>/evidence/verification.json",
+    "evidence_json=https://example.com/evidence.json",
+    "receipt_ref=runx:receipt:<id>",
+    "report=https://example.com/report.md"
+  ]
+}
