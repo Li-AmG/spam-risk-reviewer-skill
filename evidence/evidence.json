@@ -1,4 +1,5 @@
 {
+  "summary": "Spam Risk Reviewer is a read-only runx skill for send-as preflight. It evaluates typed campaign metadata, list hygiene, and sender authentication posture, emits a grounded send_risk_verdict without sending mail or mutating state, and includes PR, raw skill files, GitHub Actions harness evidence, dogfood output, and receipt_ref for reviewer verification.",
   "schema": "spam.risk.reviewer.delivery.evidence.v1",
   "observations": [
     "runx --version output: runx-cli 0.6.13",
